@@ -1,11 +1,11 @@
 # Base Web App Configuration
 
-This basic web app configuration will deploy a VPC, EC2 instance, Secrets Manager secret, and S3 bucket in the us-west-2 region. During the Terraform Inputs and Outputs course you will make improvements to the configuration. Each section below details the desired changes for each module of the course.
+This basic web app configuration will deploy a VPC, EC2 instance, Secrets Manager secret, and S3 bucket in the us-west-2 region. During the *Terraform Inputs and Outputs* course you will make improvements to the configuration. Each section below details the desired changes for each module of the course.
 
 Before you begin making changes, you should make a copy of the `base_app` directory and make your changes in that copy. Run one of the following commands depending on your shell:
 
 ```bash
-# Linux
+# Linux and Mac
 cp ./base_app ./working_app
 ```
 
@@ -44,46 +44,22 @@ Your goal in this module is to make the following improvements to the code:
 
 ## Module 3 - Local Values
 
+Your goal in this module is to make the following improvements:
+
+* Create `project` and `tags` input variables in the root module
+* Create a `tags` input variable for the `s3_bucket` module
+* Create a local value `naming_prefix` that is in the form of "project-environment"
+* Create a `default_tags` local value including the environment and project values as tags
+* Create local values for the name of each resource
+* Update the configuration to use the new name values
+* Update the `network` module, EC2 instance, and `s3_bucket` module to include tags
+
 ## Module 4 - Output Values
 
-## Future Enhancements (Input Variables topic)
+Your goal in this module is to make the following improvements:
 
-Add a complex object variable to define VPC and subnet CIDRs together.
-
-Mark ami_id as sensitive = true.
-
-Add validation to instance_type.
-
-Add a map or list of EC2 tags.
-
-Update the storage module inputs to use new variable structure.
-
-## Future Enhancements (Output Values topic)
-
-Add description for outputs.
-
-Use sensitive = true for sensitive outputs.
-
-Add new outputs from the locals.
-
-Update child module to expose more useful values (ARN, region, etc).
-
-## Future Enhancements (Child Module)
-
-Accept additional inputs (e.g. enable_versioning, tags).
-
-Add validations.
-
-Add outputs for ARN, versioning, etc.
-
-## Future locals Usage Ideas
-
-In the next lesson, locals can be added for:
-
-Default tags reused across resources.
-
-Deriving name strings like "web-${var.environment}".
-
-Selecting AMI based on region.
-
-Combining map or list data for lookup behavior.
+* Add outputs to the `s3_bucket` module for the bucket arn, id, and policy
+* Add outputs to the root module for the EC2 public dns, bucket info, and public subnet ids
+  * The public subnet ids and `vpc_id` should be marked as sensitive
+  * The bucket info output should include the bucket arn, id, and policy as a map
+* All outputs should have a description and appear in alphabetical order
